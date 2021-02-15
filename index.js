@@ -19,7 +19,6 @@ mongoose.connect(process.env.DB_CONNECT, {
         console.log('db connected')
 );
 
-app.use(express.urlencoded({ extended: false }));
 
 // middleware
 app.use(express.json());
