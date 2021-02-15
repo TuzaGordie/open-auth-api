@@ -124,7 +124,7 @@ router.post('/forgotpassword', async (req, res) => {
           ",\n\n" +
           "You are receiving this mail because you requested for a password reset for your account.\n\n" +
           "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
-          "https://open-auth.netlify.app/password-reset/" +
+          "https://open-auth.netlify.app/auth/password-reset/" +
           resettoken.resettoken +
           "\n\n" +
           "If you did not request this, please ignore this email and your password will remain unchanged.\n"
