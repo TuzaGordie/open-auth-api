@@ -145,6 +145,7 @@ router.post('/forgotpassword', async (req, res) => {
 //VALIDATE RESET PASSWORD TOKEN
 
 router.post('validate-password-token', async (req, res) => {
+    console.log('ninja validate');
     if (!req.body.resettoken) {
       return res.status(500).json({ message: "Token is required" });
     }
@@ -164,7 +165,10 @@ router.post('validate-password-token', async (req, res) => {
 });
 
 
+//CREATE NEW PASSWORD
+
 router.post('new-password', async (req, res) => {
+  console.log('ninja new password');
     passwordResetToken.findOne({ userToken: req.body.resettoken }, function(err, userToken, next) {
       if (!userToken) {
         return res.status(409).json({ message: "Token has expired" });
