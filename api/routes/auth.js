@@ -31,8 +31,7 @@ router.post('/register', async (req, res) => {
 
     //create a new user
     const user = new User({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
+        fullname: req.body.fullname,
         email: req.body.email,
         password: hashedpassword
     });
@@ -63,7 +62,7 @@ router.post('/login', async (req, res) => {
 
 
     //create and assign a token
-    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
+    const token = jwt.sign({name: user.fullname}, process.env.TOKEN_SECRET);
     return res.status(200).json(token);
     
 });
@@ -120,7 +119,7 @@ router.post('/forgotpassword', async (req, res) => {
         subject: "Password Reset",
         text:
           "Hello " +
-          user.firstname +
+          user.fullname +
           ",\n\n" +
           "You are receiving this mail because you requested for a password reset for your account.\n\n" +
           "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
@@ -171,7 +170,7 @@ router.post('/new-password', async (req, res) => {
       if (!userToken) {
         return res.status(409).json({ message: "Token has expired" });
       }
-  
+      
       User.findOne(
         {_id: userToken._userId},
         function(err, userEmail, next) {
